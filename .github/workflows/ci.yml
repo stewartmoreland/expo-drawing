@@ -16,23 +16,26 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Enable Corepack
+        run: corepack enable
+
       - name: Setup Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
-          cache: 'npm'
+          cache: 'yarn'
 
       - name: Install dependencies
-        run: npm ci
+        run: yarn install --immutable
 
       - name: Lint
-        run: npm run lint
+        run: yarn lint
 
       - name: Build
-        run: npm run build
+        run: yarn build
 
       - name: Run tests with coverage
-        run: npm run test -- --coverage --maxWorkers=2
+        run: yarn test --coverage --maxWorkers=2
 
       - name: Upload coverage to Codecov
         if: matrix.node-version == 20
@@ -49,11 +52,14 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Enable Corepack
+        run: corepack enable
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: 'npm'
+          cache: 'yarn'
 
       - name: Setup Java
         uses: actions/setup-java@v4
@@ -65,10 +71,10 @@ jobs:
         uses: android-actions/setup-android@v3
 
       - name: Install dependencies
-        run: npm ci
+        run: yarn install --immutable
 
       - name: Build TypeScript
-        run: npm run build
+        run: yarn build
 
       - name: Gradle Build
         working-directory: android
@@ -85,21 +91,24 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Enable Corepack
+        run: corepack enable
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: 'npm'
+          cache: 'yarn'
 
       - name: Install dependencies
-        run: npm ci
+        run: yarn install --immutable
 
       - name: Build TypeScript
-        run: npm run build
+        run: yarn build
 
       - name: Install example dependencies
         working-directory: example
-        run: npm ci
+        run: yarn install --immutable
 
       - name: Install CocoaPods
         working-directory: example/ios
@@ -122,21 +131,24 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Enable Corepack
+        run: corepack enable
+
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: 'npm'
+          cache: 'yarn'
 
       - name: Install dependencies
-        run: npm ci
+        run: yarn install --immutable
 
       - name: Type check
-        run: npx tsc --noEmit
+        run: yarn tsc --noEmit
 
       - name: Type check example
         working-directory: example
         run: |
-          npm ci
-          npx tsc --noEmit
+          yarn install --immutable
+          yarn tsc --noEmit
 
