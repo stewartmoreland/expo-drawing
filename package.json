@@ -28,16 +28,22 @@
   "author": "Stewart Moreland <stewartmoreland@users.noreply.github.com> (https://github.com/stewartmoreland)",
   "license": "MIT",
   "homepage": "https://github.com/stewartmoreland/expo-drawing#readme",
-  "dependencies": {},
   "devDependencies": {
     "@types/react": "~19.1.0",
-    "expo-module-scripts": "^5.0.8",
+    "eslint": "^9.39.2",
+    "eslint-config-expo": "^10.0.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.4",
     "expo": "^54.0.27",
+    "expo-module-scripts": "^5.0.8",
+    "prettier": "^3.7.4",
+    "react": "19.1.0",
     "react-native": "0.81.5"
   },
   "peerDependencies": {
     "expo": "*",
     "react": "*",
     "react-native": "*"
-  }
+  },
+  "packageManager": "yarn@4.12.0"
 }
