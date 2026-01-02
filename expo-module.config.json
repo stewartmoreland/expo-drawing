@@ -1,0 +1,9 @@
+{
+  "platforms": ["apple", "android", "web"],
+  "apple": {
+    "modules": ["ExpoDrawingModule"]
+  },
+  "android": {
+    "modules": ["expo.modules.drawing.ExpoDrawingModule"]
+  }
+}
