@@ -15,9 +15,19 @@ jest.mock("expo", () => {
       const React = require("react");
       return React.forwardRef((props, ref) => {
         const { View } = require("react-native");
+        
+        // Expose the native methods through the ref using useImperativeHandle
+        React.useImperativeHandle(ref, () => ({
+          undo: jest.fn(() => Promise.resolve()),
+          redo: jest.fn(() => Promise.resolve()),
+          clearDrawing: jest.fn(() => Promise.resolve()),
+          getCanvasDataAsBase64: jest.fn(() => Promise.resolve("mock-base64-data")),
+          showToolPicker: jest.fn(() => Promise.resolve()),
+          hideToolPicker: jest.fn(() => Promise.resolve()),
+        }));
+        
         return React.createElement(View, {
           ...props,
-          ref,
           testID: "mocked-native-view",
         });
       });

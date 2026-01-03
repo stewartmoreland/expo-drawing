@@ -20,6 +20,7 @@ module.exports = {
     "src/**/*.{ts,tsx}",
     "!src/**/*.web.{ts,tsx}",
     "!src/**/*.d.ts",
+    "!src/**/*.types.ts",
     "!**/__tests__/**",
     "!**/__mocks__/**",
   ],

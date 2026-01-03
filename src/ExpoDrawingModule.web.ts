@@ -1,15 +1,8 @@
-import { registerWebModule, NativeModule } from 'expo';
+import { NativeModule, requireNativeModule } from 'expo';
 
-import { ExpoDrawingModuleEvents } from './ExpoDrawing.types';
-
-class ExpoDrawingModule extends NativeModule<ExpoDrawingModuleEvents> {
-  PI = Math.PI;
-  async setValueAsync(value: string): Promise<void> {
-    this.emit('onChange', { value });
-  }
-  hello() {
-    return 'Hello world! 👋';
-  }
+declare class ExpoDrawingModule extends NativeModule {
+  // No module-level methods for now - all functionality is in the view
 }
 
-export default registerWebModule(ExpoDrawingModule, 'ExpoDrawingModule');
+// This call loads the native module object from the JSI.
+export default requireNativeModule<ExpoDrawingModule>('ExpoDrawing');
