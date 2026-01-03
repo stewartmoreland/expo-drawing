@@ -7,31 +7,25 @@ const NativeView: any = requireNativeView('ExpoDrawing');
 
 const ExpoDrawingView = React.forwardRef<DrawingViewRef, ExpoDrawingViewProps>(
   (props, ref) => {
-    const nativeRef = React.useRef(null);
+    const nativeRef = React.useRef<any>(null);
 
     React.useImperativeHandle(ref, () => ({
       async undo() {
-        // @ts-expect-error - Native methods are not typed
         return nativeRef.current?.undo();
       },
       async redo() {
-        // @ts-expect-error - Native methods are not typed
         return nativeRef.current?.redo();
       },
       async clearDrawing() {
-        // @ts-expect-error - Native methods are not typed
         return nativeRef.current?.clearDrawing();
       },
       async getCanvasDataAsBase64() {
-        // @ts-expect-error - Native methods are not typed
         return nativeRef.current?.getCanvasDataAsBase64();
       },
       async showToolPicker() {
-        // @ts-expect-error - Native methods are not typed
         return nativeRef.current?.showToolPicker?.();
       },
       async hideToolPicker() {
-        // @ts-expect-error - Native methods are not typed
         return nativeRef.current?.hideToolPicker?.();
       },
     }));
