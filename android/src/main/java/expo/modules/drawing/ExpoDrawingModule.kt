@@ -1,17 +1,11 @@
 package expo.modules.drawing
 
+import android.graphics.Color
 import expo.modules.kotlin.modules.Module
 import expo.modules.kotlin.modules.ModuleDefinition
-import java.net.URL
 
 class ExpoDrawingModule : Module() {
-  // Each module class must implement the definition function. The definition consists of components
-  // that describes the module's functionality and behavior.
-  // See https://docs.expo.dev/modules/module-api for more details about available components.
   override fun definition() = ModuleDefinition {
-    // Sets the name of the module that JavaScript code will use to refer to the module. Takes a string as an argument.
-    // Can be inferred from module's class name, but it's recommended to set it explicitly for clarity.
-    // The module will be accessible from `requireNativeModule('ExpoDrawing')` in JavaScript.
     Name("ExpoDrawing")
 
     // Defines constant property on the module.
@@ -36,15 +30,59 @@ class ExpoDrawingModule : Module() {
       ))
     }
 
-    // Enables the module to be used as a native view. Definition components that are accepted as part of
-    // the view definition: Prop, Events.
+    // Drawing view component definition
     View(ExpoDrawingView::class) {
-      // Defines a setter for the `url` prop.
-      Prop("url") { view: ExpoDrawingView, url: URL ->
-        view.webView.loadUrl(url.toString())
+      // Events for stroke lifecycle
+      Events("onStrokeStart", "onStrokeEnd")
+
+      // Props for brush configuration
+      Prop("strokeColor") { view: ExpoDrawingView, colorString: String? ->
+        colorString?.let {
+          try {
+            val color = Color.parseColor(it)
+            view.setStrokeColor(color)
+          } catch (e: IllegalArgumentException) {
+            // Invalid color string, ignore
+          }
+        }
       }
-      // Defines an event that the view can send to JavaScript.
-      Events("onLoad")
+
+      Prop("strokeThickness") { view: ExpoDrawingView, thickness: Float? ->
+        thickness?.let {
+          if (it > 0) {
+            view.setStrokeThickness(it)
+          }
+        }
+      }
+
+      Prop("tool") { view: ExpoDrawingView, toolName: String? ->
+        toolName?.let {
+          view.setTool(it)
+        }
+      }
+
+      Prop("enableFingerDrawing") { view: ExpoDrawingView, allow: Boolean? ->
+        allow?.let {
+          view.setEnableFingerDrawing(it)
+        }
+      }
+
+      // AsyncFunctions for imperative methods
+      AsyncFunction("undo") { view: ExpoDrawingView ->
+        view.undo()
+      }
+
+      AsyncFunction("redo") { view: ExpoDrawingView ->
+        view.redo()
+      }
+
+      AsyncFunction("clearDrawing") { view: ExpoDrawingView ->
+        view.clearDrawing()
+      }
+
+      AsyncFunction("getCanvasDataAsBase64") { view: ExpoDrawingView ->
+        view.getCanvasDataAsBase64()
+      }
     }
   }
 }
