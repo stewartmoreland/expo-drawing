@@ -2,14 +2,18 @@ import * as React from 'react';
 
 import { ExpoDrawingViewProps } from './ExpoDrawing.types';
 
-export default function ExpoDrawingView(props: ExpoDrawingViewProps) {
+export default function ExpoDrawingView(_props: ExpoDrawingViewProps) {
   return (
-    <div>
-      <iframe
-        style={{ flex: 1 }}
-        src={props.url}
-        onLoad={() => props.onLoad({ nativeEvent: { url: props.url } })}
-      />
+    <div
+      style={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        padding: '20px',
+        backgroundColor: '#f0f0f0',
+      }}
+    >
+      <p>Drawing functionality is not available on web. Please use iOS or Android.</p>
     </div>
   );
 }

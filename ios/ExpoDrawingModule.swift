@@ -10,39 +10,64 @@ public class ExpoDrawingModule: Module {
     // The module will be accessible from `requireNativeModule('ExpoDrawing')` in JavaScript.
     Name("ExpoDrawing")
 
-    // Defines constant property on the module.
-    Constant("PI") {
-      Double.pi
-    }
-
-    // Defines event names that the module can send to JavaScript.
-    Events("onChange")
-
-    // Defines a JavaScript synchronous function that runs the native code on the JavaScript thread.
-    Function("hello") {
-      return "Hello world! 👋"
-    }
-
-    // Defines a JavaScript function that always returns a Promise and whose native code
-    // is by default dispatched on the different thread than the JavaScript runtime runs on.
-    AsyncFunction("setValueAsync") { (value: String) in
-      // Send an event to JavaScript.
-      self.sendEvent("onChange", [
-        "value": value
-      ])
-    }
-
     // Enables the module to be used as a native view. Definition components that are accepted as part of the
     // view definition: Prop, Events.
     View(ExpoDrawingView.self) {
-      // Defines a setter for the `url` prop.
-      Prop("url") { (view: ExpoDrawingView, url: URL) in
-        if view.webView.url != url {
-          view.webView.load(URLRequest(url: url))
+      // Define events that can be sent to JavaScript
+      Events("onStrokeStart", "onStrokeEnd")
+      
+      // MARK: - Props
+      
+      Prop("strokeColor") { (view: ExpoDrawingView, colorString: String?) in
+        if let color = colorString {
+          view.setStrokeColor(color)
         }
       }
-
-      Events("onLoad")
+      
+      Prop("strokeThickness") { (view: ExpoDrawingView, thickness: Double?) in
+        if let width = thickness {
+          view.setStrokeThickness(CGFloat(width))
+        }
+      }
+      
+      Prop("tool") { (view: ExpoDrawingView, toolName: String?) in
+        if let tool = toolName {
+          view.setTool(tool)
+        }
+      }
+      
+      Prop("enableFingerDrawing") { (view: ExpoDrawingView, enabled: Bool?) in
+        if let allow = enabled {
+          view.setEnableFingerDrawing(allow)
+        }
+      }
+      
+      // MARK: - Methods
+      
+      AsyncFunction("undo") { (view: ExpoDrawingView) in
+        view.undo()
+      }
+      
+      AsyncFunction("redo") { (view: ExpoDrawingView) in
+        view.redo()
+      }
+      
+      AsyncFunction("clearDrawing") { (view: ExpoDrawingView) in
+        view.clearDrawing()
+      }
+      
+      AsyncFunction("getCanvasDataAsBase64") { (view: ExpoDrawingView) -> String? in
+        return view.getCanvasDataAsBase64()
+      }
+      
+      // iOS-only tool picker methods
+      AsyncFunction("showToolPicker") { (view: ExpoDrawingView) in
+        view.showToolPicker()
+      }
+      
+      AsyncFunction("hideToolPicker") { (view: ExpoDrawingView) in
+        view.hideToolPicker()
+      }
     }
   }
 }
