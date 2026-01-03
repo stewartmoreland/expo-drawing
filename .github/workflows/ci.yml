@@ -77,6 +77,10 @@ jobs:
       - name: Build TypeScript
         run: yarn build
 
+      - name: Prebuild Android
+        working-directory: example
+        run: npx expo prebuild --platform android --no-install
+
       - name: Gradle Build
         working-directory: example/android
         run: ./gradlew assembleRelease --no-daemon
@@ -106,6 +110,10 @@ jobs:
 
       - name: Build TypeScript
         run: yarn build
+
+      - name: Prebuild iOS
+        working-directory: example
+        run: npx expo prebuild --platform ios --no-install
 
       - name: Install CocoaPods
         working-directory: example/ios
