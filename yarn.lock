@@ -5578,6 +5578,18 @@ __metadata:
   languageName: node
   linkType: hard
 
+"expo-drawing-example@workspace:example":
+  version: 0.0.0-use.local
+  resolution: "expo-drawing-example@workspace:example"
+  dependencies:
+    "@types/react": "npm:~19.1.0"
+    expo: "npm:~54.0.30"
+    react: "npm:19.1.0"
+    react-native: "npm:0.81.5"
+    typescript: "npm:~5.9.2"
+  languageName: unknown
+  linkType: soft
+
 "expo-drawing@workspace:.":
   version: 0.0.0-use.local
   resolution: "expo-drawing@workspace:."
@@ -5703,7 +5715,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"expo@npm:^54.0.27":
+"expo@npm:^54.0.27, expo@npm:~54.0.30":
   version: 54.0.30
   resolution: "expo@npm:54.0.30"
   dependencies:
@@ -10785,7 +10797,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@npm:^5.9.2, typescript@npm:^5.9.3":
+"typescript@npm:^5.9.2, typescript@npm:^5.9.3, typescript@npm:~5.9.2":
   version: 5.9.3
   resolution: "typescript@npm:5.9.3"
   bin:
@@ -10795,7 +10807,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@npm%3A^5.9.2#optional!builtin<compat/typescript>, typescript@patch:typescript@npm%3A^5.9.3#optional!builtin<compat/typescript>":
+"typescript@patch:typescript@npm%3A^5.9.2#optional!builtin<compat/typescript>, typescript@patch:typescript@npm%3A^5.9.3#optional!builtin<compat/typescript>, typescript@patch:typescript@npm%3A~5.9.2#optional!builtin<compat/typescript>":
   version: 5.9.3
   resolution: "typescript@patch:typescript@npm%3A5.9.3#optional!builtin<compat/typescript>::version=5.9.3&hash=5786d5"
   bin:

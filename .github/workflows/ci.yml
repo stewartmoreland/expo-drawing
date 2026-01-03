@@ -78,11 +78,11 @@ jobs:
         run: yarn build
 
       - name: Gradle Build
-        working-directory: android
+        working-directory: example/android
         run: ./gradlew assembleRelease --no-daemon
 
       - name: Run Android Lint
-        working-directory: android
+        working-directory: example/android
         run: ./gradlew lint --no-daemon
         continue-on-error: true
 
@@ -106,10 +106,6 @@ jobs:
 
       - name: Build TypeScript
         run: yarn build
-
-      - name: Install example dependencies
-        working-directory: example
-        run: yarn install --immutable
 
       - name: Install CocoaPods
         working-directory: example/ios
@@ -149,7 +145,5 @@ jobs:
 
       - name: Type check example
         working-directory: example
-        run: |
-          yarn install --immutable
-          yarn tsc --noEmit
+        run: yarn tsc --noEmit
 
