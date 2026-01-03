@@ -77,6 +77,10 @@ jobs:
       - name: Build TypeScript
         run: yarn build
 
+      - name: Install example dependencies
+        working-directory: example
+        run: yarn install
+
       - name: Prebuild Android
         working-directory: example
         run: npx expo prebuild --platform android --no-install
@@ -110,6 +114,10 @@ jobs:
 
       - name: Build TypeScript
         run: yarn build
+
+      - name: Install example dependencies
+        working-directory: example
+        run: yarn install
 
       - name: Prebuild iOS
         working-directory: example
@@ -150,6 +158,10 @@ jobs:
 
       - name: Type check
         run: yarn tsc --noEmit
+
+      - name: Install example dependencies
+        working-directory: example
+        run: yarn install
 
       - name: Type check example
         working-directory: example
