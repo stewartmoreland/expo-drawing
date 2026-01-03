@@ -41,3 +41,15 @@ android {
     abortOnError false
   }
 }
+
+// Android Ink API dependencies for drawing functionality
+def ink_version = "1.0.0-rc01"
+
+dependencies {
+  implementation "androidx.ink:ink-nativeloader:$ink_version"
+  implementation "androidx.ink:ink-rendering:$ink_version"
+  implementation "androidx.ink:ink-strokes:$ink_version"
+  implementation "androidx.ink:ink-authoring:$ink_version"
+  implementation "androidx.ink:ink-brush:$ink_version"
+  implementation "androidx.ink:ink-geometry:$ink_version"
+}
