@@ -77,12 +77,16 @@ jobs:
       - name: Build TypeScript
         run: yarn build
 
+      - name: Prebuild Android
+        working-directory: example
+        run: npx expo prebuild --platform android --no-install
+
       - name: Gradle Build
-        working-directory: android
+        working-directory: example/android
         run: ./gradlew assembleRelease --no-daemon
 
       - name: Run Android Lint
-        working-directory: android
+        working-directory: example/android
         run: ./gradlew lint --no-daemon
         continue-on-error: true
 
@@ -107,9 +111,9 @@ jobs:
       - name: Build TypeScript
         run: yarn build
 
-      - name: Install example dependencies
+      - name: Prebuild iOS
         working-directory: example
-        run: yarn install --immutable
+        run: npx expo prebuild --platform ios --no-install
 
       - name: Install CocoaPods
         working-directory: example/ios
@@ -149,7 +153,5 @@ jobs:
 
       - name: Type check example
         working-directory: example
-        run: |
-          yarn install --immutable
-          yarn tsc --noEmit
+        run: yarn tsc --noEmit
 
