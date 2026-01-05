@@ -5610,6 +5610,7 @@ __metadata:
     prettier: "npm:^3.7.4"
     react: "npm:19.1.0"
     react-native: "npm:0.81.5"
+    react-test-renderer: "npm:19.1.0"
     ts-jest: "npm:^29.4.6"
     ts-node-dev: "npm:^2.0.0"
     typescript: "npm:^5.9.3"
